@@ -59,7 +59,7 @@
   var idx = 0;
   if (saved) { Object.assign(A, saved.A || {}); if (saved.idx >= 0 && saved.idx < screens.length) idx = saved.idx; }
 
-  function visible(i) { return REVIEW || !screens[i].cond || screens[i].cond(); }
+  function visible(i) { return !screens[i].cond || screens[i].cond(); }
   function go(d) {
     var i = idx + d;
     while (i >= 0 && i < screens.length && !visible(i)) i += d;
