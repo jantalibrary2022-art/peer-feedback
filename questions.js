@@ -16,7 +16,7 @@ window.SURVEY = {
     { id:"b6", r:true, t:"He corrects people in front of others.", s:"I correct people in front of others." },
     { id:"b7", t:"He says so when someone else's point is better than his.", s:"I say so when someone else's point is better than mine." },
     { id:"b8", t:"When his own work is questioned, he responds to the point without getting defensive.", s:"When my own work is questioned, I respond to the point without getting defensive." },
-    { id:"b9", r:true, t:"His written messages include remarks that read as curt or sarcastic.", s:"My written messages include remarks that read as curt or sarcastic." },
+    { id:"b9", r:true, t:"His messages or emails come across as rude or taunting.", s:"My messages or emails come across as rude or taunting." },
     { id:"b10", t:"Junior colleagues question or contradict him in his presence.", s:"Junior colleagues question or contradict me in my presence." }
   ],
   situ: [
