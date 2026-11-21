@@ -1,10 +1,21 @@
 (function () {
   "use strict";
   var S = window.SURVEY, CFG = window.FIREBASE_CONFIG || {};
-  var PREVIEW = !CFG.apiKey || CFG.apiKey.indexOf("PASTE") === 0;
-  var SELF = new URLSearchParams(location.search).has("self");
+  var QS = new URLSearchParams(location.search);
+  var REVIEW = QS.has("review");   // owner's review mode: jump to any screen, nothing is saved
+  var PREVIEW = REVIEW || !CFG.apiKey || CFG.apiKey.indexOf("PASTE") === 0;
+  var SELF = QS.has("self");
   var FB = "https://www.gstatic.com/firebasejs/10.12.2/";
   var A = {};            // answers
+  // Progress is kept in this browser tab only, so a refresh resumes at the same screen. It is cleared on Submit or Stop.
+  var saved = null;
+  try { saved = JSON.parse(sessionStorage.getItem("pf_state") || "null"); } catch (e) {}
+  if (!saved || SELF || saved.review !== REVIEW) saved = null;
+  var seed = saved ? saved.seed : Math.floor(Math.random() * 4294967296);
+  var rs = seed;
+  function rand() { rs = (rs + 0x6D2B79F5) | 0; var t = Math.imul(rs ^ (rs >>> 15), 1 | rs); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
+  function keep() { if (SELF) return; try { sessionStorage.setItem("pf_state", JSON.stringify({ seed: seed, A: A, idx: idx, review: REVIEW })); } catch (e) {} }
+  function forget() { try { sessionStorage.removeItem("pf_state"); } catch (e) {} }
   var fb = null;         // firebase handles, loaded lazily
   var app = document.getElementById("app"), bar = document.getElementById("bar");
 
@@ -20,7 +31,7 @@
   }
   function shuffle(a) {
     a = a.slice();
-    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rand() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
     return a;
   }
   function worked() { return SELF || A.rel === "client" || A.rel === "peer" || A.rel === "both"; }
@@ -46,8 +57,9 @@
   screens.push({ type: "submit" });
   var adjList = shuffle(S.adjectives.pos.concat(S.adjectives.neg));
   var idx = 0;
+  if (saved) { Object.assign(A, saved.A || {}); if (saved.idx >= 0 && saved.idx < screens.length) idx = saved.idx; }
 
-  function visible(i) { return !screens[i].cond || screens[i].cond(); }
+  function visible(i) { return REVIEW || !screens[i].cond || screens[i].cond(); }
   function go(d) {
     var i = idx + d;
     while (i >= 0 && i < screens.length && !visible(i)) i += d;
@@ -197,6 +209,7 @@
   }
   function stop() {
     for (var k in A) delete A[k];
+    forget();
     bar.style.width = "0%";
     app.innerHTML = "";
     var c = el("div", { "class": "card" });
@@ -207,6 +220,7 @@
   }
   function done() {
     if (!SELF && !PREVIEW) { try { localStorage.setItem("pf_done", "1"); } catch (e) {} }
+    forget();
     bar.style.width = "100%";
     app.innerHTML = "";
     var c = el("div", { "class": "card" });
@@ -218,7 +232,12 @@
   function render() {
     var s = screens[idx];
     app.innerHTML = "";
-    if (PREVIEW) app.appendChild(el("div", { "class": "note", text: "Preview mode. Answers are not saved." }));
+    if (REVIEW) {
+      var sel = el("select", { style: "width:100%;margin-bottom:10px", on: { change: function (e) { idx = +e.target.value; render(); } } });
+      screens.forEach(function (x, i) { var t = (i + 1) + ". " + (x.q || x.t || { intro: "Welcome", adj: "Five words", submit: "Submit" }[x.type] || x.type); sel.appendChild(el("option", { value: String(i), text: t.length > 60 ? t.slice(0, 58) + "…" : t })); });
+      sel.value = String(idx);
+      app.appendChild(el("div", { "class": "note" }, el("strong", { text: "Review mode. Nothing is saved. Jump to any screen:" }), sel));
+    } else if (PREVIEW) app.appendChild(el("div", { "class": "note", text: "Preview mode. Answers are not saved." }));
     var c = el("div", { "class": "card" });
     if (s.sec) c.appendChild(el("p", { "class": "sec", text: SELF && s.sec === "His work" ? "My work" : s.sec }));
     var b = selfBanner(); if (b && (s.type === "scale")) c.appendChild(b);
@@ -226,6 +245,7 @@
     app.appendChild(c);
     if (!SELF && s.type !== "intro") app.appendChild(el("p", { style: "text-align:center" }, el("button", { "class": "btn ghost", type: "button", text: "Stop, I would rather not take part", on: { click: stop } })));
     progress();
+    keep();
     window.scrollTo(0, 0);
   }
 
