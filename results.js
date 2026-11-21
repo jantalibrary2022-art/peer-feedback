@@ -171,7 +171,7 @@
     var g5 = el("div", { "class": "grid2" });
     g5.appendChild(distBlock("Who responded", rows, function (r) { return r.rel; }, S.ice[1].opts));
     g5.appendChild(distBlock("How long they have known you", rows, function (r) { return r.known; }, S.ice[0].opts));
-    g5.appendChild(distBlock("On a cricket team you would be the…", rows, function (r) { return r.cricket; }, S.ice[2].opts));
+    g5.appendChild(distBlock("In a game of cricket you would be the…", rows, function (r) { return r.cricket; }, S.ice[2].opts));
     app.appendChild(g5);
   }
 
