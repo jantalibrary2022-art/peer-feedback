@@ -145,7 +145,7 @@
     jw.appendChild(el("p", { "class": "mute", text: "Number in brackets is how many respondents chose the word. A word counts as chosen by others when at least " + cut + " picked it." }));
     app.appendChild(jw);
 
-    var wrows = rows.filter(function (r) { return r.rel === "client" || r.rel === "peer"; });
+    var wrows = rows.filter(function (r) { return r.rel === "client" || r.rel === "peer" || r.rel === "both"; });
     app.appendChild(itemTable("Work (" + wrows.length + " respondents who have worked with you)", S.work, "w", wrows));
     var g3 = el("div", { "class": "grid2" });
     g3.appendChild(distBlock("Compared with consultants of similar seniority", wrows, function (r) { return r.w_comp; }, S.comp.opts, SELFDOC && SELFDOC.w_comp));
@@ -186,7 +186,7 @@
       while (adj.length < 5) { var x = rnd(pool); if (adj.indexOf(x) < 0) adj.push(x); }
       r = { v: 1, b: b, s1: rnd(["once", "argue", "argue"]), s2: rnd(["private", "group", "group"]), adj: adj, w: w, w_comp: rnd(["best", "above", "above", "avg"]), first: [rnd(["baseline", "mne", "training"]), "audit"] };
       if (!self) {
-        r.rel = rnd(["client", "client", "peer", "peer", "social"]); r.known = rnd(["2to5", "5to10", "gt10"]); r.cricket = rnd(["captain", "umpire", "allrounder", "commentator"]);
+        r.rel = rnd(["client", "client", "peer", "both", "social"]); r.known = rnd(["2to5", "5to10", "gt10"]); r.cricket = rnd(["captain", "umpire", "allrounder", "commentator"]);
         r.rec = rnd([5, 6, 7, 8, 8, 9, 10]); r.again = rnd(["yes", "yes", "reservations", "reservations", "no"]); r.resv = r.again === "yes" ? "" : rnd(["manner", "manner", "nowork", "unsure"]); r.held = rnd(["yes", "no", "no"]);
         if (r.rel === "social") { r.w = {}; r.w_comp = ""; r.first = []; }
       } else r.s1 = "once", r.s2 = "private";

@@ -23,7 +23,7 @@
     for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
     return a;
   }
-  function worked() { return SELF || A.rel === "client" || A.rel === "peer"; }
+  function worked() { return SELF || A.rel === "client" || A.rel === "peer" || A.rel === "both"; }
 
   // ---- build the list of screens ----
   var screens = [];
@@ -103,6 +103,7 @@
     },
     single: function (c, s) {
       c.appendChild(el("h2", { text: SELF && s.sq ? s.sq : s.q }));
+      if (s.hint) c.appendChild(el("p", { "class": "mute", text: s.hint }));
       s.opts.forEach(function (o) {
         c.appendChild(el("button", { "class": "opt" + (A[s.id] === o[0] ? " on" : ""), type: "button", text: o[1], on: { click: function () { pick(s.id, o[0]); } } }));
       });

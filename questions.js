@@ -4,7 +4,7 @@ window.SURVEY = {
   scale: [[1,"Almost never"],[2,"Rarely"],[3,"Sometimes"],[4,"Often"],[5,"Almost always"],[0,"Not observed"]],
   ice: [
     { id:"known", q:"How long have you known Prakash?", opts:[["lt2","Under 2 years"],["2to5","2 to 5 years"],["5to10","5 to 10 years"],["gt10","Over 10 years"]] },
-    { id:"rel", q:"How do you know him?", opts:[["client","I engaged him as a client or commissioning manager"],["peer","We worked together as consultants or team members"],["social","I know him, but we have not worked together"]] },
+    { id:"rel", q:"Have you worked with him?", hint:"Friends and family too: choose by whether you have worked with him. If more than one fits, pick \u201cBoth\u201d.", opts:[["client","Yes, he worked for me or my organisation"],["peer","Yes, we worked alongside each other"],["both","Both of the above"],["social","No, I know him personally or by reputation"]] },
     { id:"cricket", q:"If he were on a cricket team, he would be the…", opts:[["opener","Opening batsman"],["allrounder","All-rounder"],["captain","Captain"],["umpire","Umpire"],["commentator","Commentator"]] }
   ],
   behaviour: [
