@@ -24,8 +24,8 @@ window.SURVEY = {
     { id:"s2", q:"When he thinks someone is wrong, he most often…", sq:"When I think someone is wrong, I most often…", opts:[["silent","Says nothing"],["private","Raises it privately"],["group","Raises it in front of the group"]] }
   ],
   adjectives: {
-    pos: ["Rigorous","Dependable","Knowledgeable","Principled","Generous","Approachable","Patient","Encouraging","Practical","Humble","Clear","Fair"],
-    neg: ["Blunt","Impatient","Rigid","Argumentative","Intimidating","Dismissive","Stubborn","Sarcastic","Defensive","Overbearing","Aloof","Short-tempered"]
+    pos: ["Thorough","Dependable","Knowledgeable","Sticks to his principles","Generous","Approachable","Patient","Encouraging","Practical","Humble","Clear","Fair"],
+    neg: ["Blunt","Impatient","Rigid","Argumentative","Intimidating","Brushes people off","Stubborn","Taunting","Defensive","Bossy","Distant","Short-tempered"]
   },
   work: [
     { id:"w1", t:"I could use his reports as submitted, without rewriting sections.", s:"Clients can use my reports as submitted, without rewriting sections." },
