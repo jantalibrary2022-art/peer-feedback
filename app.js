@@ -110,7 +110,7 @@
       c.appendChild(nav(A[s.id] !== undefined, A[s.id] !== undefined ? function () { go(1); } : null));
     },
     scale: function (c, s) {
-      c.appendChild(el("p", { "class": "mute", text: "How often is this true?" }));
+      c.appendChild(el("p", { "class": "ctx", text: "How often is this true?" }));
       c.appendChild(el("h2", { text: SELF ? s.s : s.t }));
       S.scale.forEach(function (o) {
         if (SELF && o[0] === 0) return;
