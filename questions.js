@@ -5,7 +5,7 @@ window.SURVEY = {
   ice: [
     { id:"known", q:"How long have you known Prakash?", opts:[["lt2","Under 2 years"],["2to5","2 to 5 years"],["5to10","5 to 10 years"],["gt10","Over 10 years"]] },
     { id:"rel", q:"Have you worked with him?", hint:"Friends and family too: choose by whether you have worked with him. If more than one fits, pick \u201cBoth\u201d.", opts:[["client","Yes, he worked for me or my organisation"],["peer","Yes, we worked alongside each other"],["both","Both of the above"],["social","No, I know him personally or by reputation"]] },
-    { id:"cricket", q:"In a game of cricket, he would be the…", opts:[["opener","Opening batsman"],["allrounder","All-rounder"],["captain","Captain"],["umpire","Umpire"],["commentator","Commentator"],["twelfth","12th man (non-playing)"],["audience","In the audience"]] }
+    { id:"cricket", q:"In a game of cricket, where would you place him?", opts:[["opener","Opening batsman"],["allrounder","All-rounder"],["captain","Captain"],["umpire","Umpire"],["commentator","Commentator"],["twelfth","12th man (non-playing)"],["audience","In the audience"]] }
   ],
   behaviour: [
     { id:"b1", t:"He lets others finish speaking before he responds.", s:"I let others finish speaking before I respond." },
