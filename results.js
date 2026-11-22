@@ -138,7 +138,7 @@
     [["Open: chosen by you and by others", function (w) { return mine.indexOf(w) >= 0 && wc[w] >= cut; }, "open"],
      ["Blind: chosen by others, not by you", function (w) { return mine.indexOf(w) < 0 && wc[w] >= cut; }, "blind"],
      ["Hidden: chosen by you, rarely by others", function (w) { return mine.indexOf(w) >= 0 && wc[w] < cut; }, "unrec"],
-     ["Chosen by almost no one", function (w) { return mine.indexOf(w) < 0 && wc[w] < cut && wc[w] <= 1; }, ""]].forEach(function (x) {
+     ["Chosen by few or none", function (w) { return mine.indexOf(w) < 0 && wc[w] < cut; }, ""]].forEach(function (x) {
       jg.appendChild(el("div", null, el("p", null, el("span", { "class": "tag " + x[2], text: x[0] })), el("p", { text: list(x[1]) })));
     });
     jw.appendChild(jg);
