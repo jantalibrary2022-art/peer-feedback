@@ -11,7 +11,7 @@ window.SURVEY = {
     { id:"b1", t:"He lets others finish speaking before he responds.", s:"I let others finish speaking before I respond." },
     { id:"b2", t:"He asks questions to understand a view before responding to it.", s:"I ask questions to understand a view before responding to it." },
     { id:"b3", r:true, t:"His tone sharpens when someone disagrees with him.", s:"My tone sharpens when someone disagrees with me." },
-    { id:"b4", r:true, t:"He returns to a point after the group has decided and moved on.", s:"I return to a point after the group has decided and moved on." },
+    { id:"b4", r:true, t:"He brings up an issue again after the group has already decided on it.", s:"I bring up an issue again after the group has already decided on it." },
     { id:"b5", t:"After a decision goes against his view, he carries it out without reopening it.", s:"After a decision goes against my view, I carry it out without reopening it." },
     { id:"b6", r:true, t:"He corrects people in front of others.", s:"I correct people in front of others." },
     { id:"b7", t:"He says so when someone else's point is better than his.", s:"I say so when someone else's point is better than mine." },

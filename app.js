@@ -78,7 +78,7 @@
       onNext ? el("button", Object.assign({ "class": "btn", type: "button", text: "Continue", on: { click: onNext } }, canNext ? {} : { disabled: "" })) : null);
   }
   function pick(id, val) { A[id] = val; render(); setTimeout(function () { go(1); }, 170); }
-  function selfBanner() { return SELF ? el("p", { "class": "mute", text: "Self-rating: answer about yourself, as honestly as you would want others to." }) : null; }
+  function selfBanner() { return SELF ? el("p", { "class": "mute", text: "Self-rating: answer as you believe you are, not as you would like to be." }) : null; }
 
   var R = {
     intro: function (c) {
