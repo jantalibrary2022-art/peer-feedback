@@ -84,12 +84,12 @@
     intro: function (c) {
       var min = window.MIN_RESPONSES || 6;
       function para(head, body) { var p = el("p"); p.appendChild(el("strong", { text: head + " " })); p.appendChild(document.createTextNode(body)); return p; }
-      c.appendChild(el("h1", { text: "Six minutes for Prakash" }));
-      c.appendChild(el("p", { text: "Prakash has asked people who know him and his work to describe how he comes across. He wants to learn what he cannot see himself." }));
-      c.appendChild(para("What is recorded:", "only the options you tap. No name, phone number, email or time of response."));
-      c.appendChild(para("What he sees:", "combined results from everyone, and only once at least " + min + " people have responded. Individual responses are not shown to him."));
-      c.appendChild(para("What helps him:", "your answers as you have seen things, including where he falls short. Agreeable answers will leave him where he is. If you have not seen something, choose \u201cNot observed\u201d."));
-      c.appendChild(para("Your choice:", "taking part is voluntary. You can press Stop at any point and nothing will be saved. Nothing is sent until you press Submit at the end."));
+      c.appendChild(el("h1", { text: "Five minutes for Prakash" }));
+      c.appendChild(el("p", { text: "Prakash wants to know how he comes across to people who know him, including what he cannot see himself." }));
+      c.appendChild(para("Anonymous:", "only your taps are recorded. No name, number, email or time of response."));
+      c.appendChild(para("What he sees:", "combined results only, once at least " + min + " people have responded."));
+      c.appendChild(para("What helps him:", "your answers as you have seen things, including where he falls short. Not seen something? Choose \u201cNot observed\u201d."));
+      c.appendChild(para("Your choice:", "press Stop at any point and nothing is saved. Nothing is sent until you press Submit."));
       c.appendChild(el("div", { "class": "nav" }, el("button", { "class": "btn ghost", type: "button", text: "No, thank you", on: { click: stop } }), el("button", { "class": "btn", type: "button", text: "Start", on: { click: function () { go(1); } } })));
     },
     selfintro: function (c) {
