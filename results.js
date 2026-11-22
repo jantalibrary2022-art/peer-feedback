@@ -100,17 +100,32 @@
     var g = counts(ALL, function (r) { return r.rel; }, S.ice[1].opts).c, canSplit = true, present = 0;
     Object.keys(g).forEach(function (k) { if (g[k] > 0) { present++; if (g[k] < GROUP_MIN) canSplit = false; } });
     canSplit = canSplit && present > 1;
-    if (!canSplit) filter = "all";
-    var rows = filter === "all" ? ALL : ALL.filter(function (r) { return r.rel === filter; });
+    // comparison by length of acquaintance: only when both sides have enough people
+    var kOld = ALL.filter(function (r) { return r.known === "gt10"; }).length;
+    var kNew = ALL.filter(function (r) { return r.known === "lt2" || r.known === "2to5" || r.known === "5to10"; }).length;
+    var canKnown = kOld >= GROUP_MIN && kNew >= GROUP_MIN;
+    var isK = filter === "k_old" || filter === "k_new";
+    if ((isK && !canKnown) || (!isK && filter !== "all" && !canSplit)) filter = "all";
+    var rows = filter === "all" ? ALL : ALL.filter(function (r) {
+      if (filter === "k_old") return r.known === "gt10";
+      if (filter === "k_new") return r.known === "lt2" || r.known === "2to5" || r.known === "5to10";
+      return r.rel === filter;
+    });
 
     var head = card();
     head.appendChild(el("div", { "class": "big", text: String(rows.length) }));
-    head.appendChild(el("p", { text: "responses" + (filter === "all" ? "" : " in this group") + ". " + (SELFDOC ? "Self-rating included." : "Self-rating missing, so the You, Gap and Reading columns are empty. Open index.html?self to complete it.") }));
-    if (canSplit) {
-      var sel = el("select", { on: { change: function (e) { filter = e.target.value; render(); } } }, el("option", { value: "all", text: "Everyone" }));
-      S.ice[1].opts.forEach(function (o) { if (g[o[0]] > 0) sel.appendChild(el("option", { value: o[0], text: o[1] + " (" + g[o[0]] + ")" })); });
+    head.appendChild(el("p", { text: "responses" + (filter === "all" ? "" : " in this view") + ". " + (SELFDOC ? "Self-rating included." : "Self-rating missing, so the You, Gap and Reading columns are empty. Open index.html?self to complete it.") }));
+    if (canSplit || canKnown) {
+      var sel = el("select", { on: { change: function (e) { filter = e.target.value; render(); } } }, el("option", { value: "all", text: "Everyone (" + ALL.length + ")" }));
+      if (canKnown) {
+        sel.appendChild(el("option", { value: "k_old", text: "Known you over 10 years (" + kOld + ")" }));
+        sel.appendChild(el("option", { value: "k_new", text: "Known you 10 years or less (" + kNew + ")" }));
+      }
+      if (canSplit) S.ice[1].opts.forEach(function (o) { if (g[o[0]] > 0) sel.appendChild(el("option", { value: o[0], text: o[1] + " (" + g[o[0]] + ")" })); });
       sel.value = filter; head.appendChild(sel);
-    } else head.appendChild(el("p", { "class": "mute", text: "Results by respondent group are shown only when every group has at least " + GROUP_MIN + " responses." }));
+    }
+    if (!canKnown) head.appendChild(el("p", { "class": "mute", text: "Comparison by how long people have known you opens when both sides have at least " + GROUP_MIN + " responses. Now: over 10 years " + kOld + ", 10 years or less " + kNew + "." }));
+    if (!canSplit) head.appendChild(el("p", { "class": "mute", text: "Results by respondent group are shown only when every group has at least " + GROUP_MIN + " responses." }));
     app.appendChild(head);
 
     // blind spots summary
