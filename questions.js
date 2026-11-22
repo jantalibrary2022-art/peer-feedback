@@ -40,7 +40,7 @@ window.SURVEY = {
   comp: { id:"w_comp", q:"Compared with consultants of similar seniority you have worked with, his work is…", sq:"Compared with consultants of similar seniority, my work is…", opts:[["best","Among the best"],["above","Above average"],["avg","Average"],["below","Below average"]] },
   first: { id:"first", q:"For which kinds of work would you think of him first?", sq:"For which kinds of work do I expect people to think of me first?", hint:"Choose all that apply.", opts:[["baseline","Baseline or evaluation studies"],["mne","M&E systems"],["training","Training and facilitation"],["proposal","Proposal development"],["csr","CSR programme design"],["audit","Social audit"],["livelihoods","Livelihoods planning"],["none","None of these"]] },
   rec: { id:"rec", q:"How likely are you to recommend him for an assignment?" },
-  again: { id:"again", q:"Would you work with him again?", opts:[["yes","Yes"],["reservations","Yes, with reservations"],["no","No"]] },
+  again: { id:"again", q:"Would you work with him again?", qn:"Would you want to work with him?", opts:[["yes","Yes"],["reservations","Yes, with reservations"],["no","No"]] },
   resv: { id:"resv", q:"What is your main reservation?", opts:[["manner","His manner"],["fit","Fit of his skills with my needs"],["availability","His availability"],["nowork","No relevant work at present"],["unsure","Unsure what he currently offers"],["other","Something else"]] },
   held: { id:"held", q:"Have you ever held back from recommending him?", opts:[["yes","Yes"],["no","No"]] }
 };

@@ -114,7 +114,7 @@
       c.appendChild(em); c.appendChild(pw); c.appendChild(err); c.appendChild(el("div", { "class": "nav" }, el("span"), b));
     },
     single: function (c, s) {
-      c.appendChild(el("h2", { text: SELF && s.sq ? s.sq : s.q }));
+      c.appendChild(el("h2", { text: SELF && s.sq ? s.sq : (s.qn && !worked() ? s.qn : s.q) }));
       if (s.hint) c.appendChild(el("p", { "class": "mute", text: s.hint }));
       s.opts.forEach(function (o) {
         c.appendChild(el("button", { "class": "opt" + (A[s.id] === o[0] ? " on" : ""), type: "button", text: o[1], on: { click: function () { pick(s.id, o[0]); } } }));

@@ -163,7 +163,7 @@
     });
     var g4 = el("div", { "class": "grid2" });
     g4.appendChild(oc);
-    g4.appendChild(distBlock(S.again.q, rows, function (r) { return r.again; }, S.again.opts));
+    g4.appendChild(distBlock("Would work with you again (or would want to, if they have not yet)", rows, function (r) { return r.again; }, S.again.opts));
     g4.appendChild(distBlock("Main reservation (those with reservations)", rows, function (r) { return r.resv; }, S.resv.opts));
     g4.appendChild(distBlock(S.held.q, rows, function (r) { return r.held; }, S.held.opts));
     app.appendChild(g4);
